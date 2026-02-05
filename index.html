@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digita+</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__logo">⌨️</span>
+      <div class="brand__text">
+        <div class="brand__name">Digita<span class="plus">+</span></div>
+        <div class="brand__tag">Treino de digitação divertido e eficiente</div>
+      </div>
+    </div>
+    <div class="topbar__actions">
+      <button id="btnProfile" class="btn btn--ghost" type="button" aria-label="Abrir perfil">Perfil</button>
+      <button id="btnTheme" class="btn btn--ghost" type="button" aria-label="Alternar tema">Tema</button>
+      <button id="btnSound" class="btn btn--ghost" type="button" aria-label="Alternar som">Som</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- AUTH -->
+    <section id="auth" class="card">
+      <h1 class="h1">Entrar</h1>
+      <p class="muted">Digite um usuário para salvar seu progresso neste navegador. A senha padrão é fixa.</p>
+
+      <label class="label" for="loginUsername">Usuário</label>
+      <input id="loginUsername" class="input" placeholder="Ex: marcos" autocomplete="username" />
+
+      <label class="label" for="loginPassword">Senha (padrão)</label>
+      <input id="loginPassword" class="input" type="password" value="aluno123" readonly />
+
+      <button id="btnLogin" class="btn btn--primary" type="button">Entrar</button>
+
+      <div class="divider"></div>
+
+      <details>
+        <summary><strong>Como posicionar as mãos</strong></summary>
+        <div class="hands">
+          <div class="hands__grid">
+            <div class="hands__card">
+              <h3 class="h3">Posição base</h3>
+              <ul class="list">
+                <li>Indicadores nas teclas <strong>F</strong> e <strong>J</strong> (têm relevo)</li>
+                <li>Polegares na barra de <strong>espaço</strong></li>
+                <li>Olhos na tela (não no teclado)</li>
+              </ul>
+            </div>
+            <div class="hands__card">
+              <h3 class="h3">Dica rápida</h3>
+              <p class="muted">Comece devagar e priorize precisão. Velocidade vem naturalmente.</p>
+              <div class="kbd">
+                <div class="kbd__row">
+                  <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key key--home">F</span>
+                  <span class="key key--gap"></span>
+                  <span class="key key--home">J</span><span class="key">K</span><span class="key">L</span><span class="key">Ç</span>
+                </div>
+                <div class="kbd__row">
+                  <span class="key key--space">ESPAÇO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- APP -->
+    <section id="app" class="app" hidden>
+      <div class="app__row">
+        <section class="card card--wide">
+          <div class="row row--between row--wrap">
+            <div>
+              <h2 class="h2">Treino</h2>
+              <p class="muted" id="welcomeLine"></p>
+            </div>
+            <div class="row row--gap row--wrap">
+              <label class="label inline" for="modeSelect">Modo</label>
+              <select id="modeSelect" class="select" aria-label="Selecionar modo">
+                <option value="beginner">Iniciante</option>
+                <option value="challenge">Desafio</option>
+              </select>
+
+              <div id="challengeControls" class="row row--gap" hidden>
+                <label class="label inline" for="challengeDuration">Tempo</label>
+                <select id="challengeDuration" class="select" aria-label="Selecionar duração">
+                  <option value="30">30s</option>
+                  <option value="60" selected>60s</option>
+                  <option value="90">90s</option>
+                </select>
+
+                <label class="label inline" for="challengeLives">Vidas</label>
+                <select id="challengeLives" class="select" aria-label="Selecionar vidas">
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+              <button id="btnNew" class="btn btn--ghost" type="button">Novo texto</button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div id="challengeHud" class="hud" hidden>
+            <div class="hud__item"><span class="hud__label">Tempo</span><span id="hudTime" class="hud__value">60</span></div>
+            <div class="hud__item"><span class="hud__label">Vidas</span><span id="hudLives" class="hud__value">3</span></div>
+            <div class="hud__item"><span class="hud__label">Pontos</span><span id="hudScore" class="hud__value">0</span></div>
+            <div class="hud__item"><span class="hud__label">Combo</span><span id="hudCombo" class="hud__value">0</span></div>
+            <div class="hud__item"><span class="hud__label">Multiplicador</span><span id="hudMult" class="hud__value">x1.0</span></div>
+          </div>
+
+          <p id="targetText" class="target" aria-label="Texto alvo"></p>
+
+          <textarea id="typingArea" class="textarea" placeholder="Comece a digitar aqui..." spellcheck="false"></textarea>
+
+          <div class="row row--between row--wrap">
+            <div class="row row--gap row--wrap">
+              <button id="btnStart" class="btn btn--primary" type="button">Iniciar</button>
+              <button id="btnReset" class="btn btn--ghost" type="button">Reiniciar</button>
+            </div>
+            <div class="row row--gap row--wrap">
+              <div class="chip"><span class="chip__label">WPM</span> <span id="statWpm">0</span></div>
+              <div class="chip"><span class="chip__label">Precisão</span> <span id="statAcc">100%</span></div>
+              <div class="chip"><span class="chip__label">Erros</span> <span id="statErr">0</span></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card">
+          <h2 class="h2">Progresso</h2>
+          <div class="mini">
+            <div class="mini__item"><span class="muted">Melhor WPM</span><strong id="bestWpm">—</strong></div>
+            <div class="mini__item"><span class="muted">Melhor Precisão</span><strong id="bestAcc">—</strong></div>
+            <div class="mini__item"><span class="muted">Melhor Desafio</span><strong id="bestScore">—</strong></div>
+            <div class="mini__item"><span class="muted">Sessões</span><strong id="sessions">0</strong></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3 class="h3">Dicas</h3>
+          <ul class="list">
+            <li>Use os indicadores em <strong>F</strong> e <strong>J</strong> como guia.</li>
+            <li>Priorize <strong>precisão</strong>. A velocidade vem com repetição.</li>
+            <li>No Desafio: acertos em sequência aumentam o <strong>combo</strong>.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <button id="btnLogout" class="btn btn--danger" type="button">Sair</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MODAL PROFILE -->
+    <dialog id="profileDialog" class="dialog">
+      <form method="dialog" class="dialog__inner">
+        <div class="row row--between">
+          <h2 class="h2">Perfil</h2>
+          <button class="btn btn--ghost" value="cancel" type="submit" aria-label="Fechar">✕</button>
+        </div>
+        <p class="muted">O progresso fica salvo neste navegador (localStorage).</p>
+        <div class="profile">
+          <div class="profile__row"><span class="muted">Usuário</span><strong id="profileUser">—</strong></div>
+          <div class="profile__row"><span class="muted">Sessões totais</span><strong id="profileSessions">0</strong></div>
+          <div class="profile__row"><span class="muted">Média WPM</span><strong id="profileAvgWpm">0</strong></div>
+          <div class="profile__row"><span class="muted">Média Precisão</span><strong id="profileAvgAcc">0%</strong></div>
+          <div class="profile__row"><span class="muted">Melhor Desafio</span><strong id="profileBestScore">0</strong></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <button id="btnResetProgress" class="btn btn--ghost" type="button">Zerar progresso deste usuário</button>
+      </form>
+    </dialog>
+
+    <!-- MODAL END -->
+    <dialog id="endDialog" class="dialog">
+      <form method="dialog" class="dialog__inner">
+        <div class="row row--between">
+          <h2 class="h2">Resultado</h2>
+          <button class="btn btn--ghost" value="cancel" type="submit" aria-label="Fechar">✕</button>
+        </div>
+        <div class="result">
+          <div class="result__grid">
+            <div class="result__card"><span class="muted">WPM</span><strong id="endWpm">0</strong></div>
+            <div class="result__card"><span class="muted">Precisão</span><strong id="endAcc">0%</strong></div>
+            <div class="result__card"><span class="muted">Erros</span><strong id="endErr">0</strong></div>
+            <div class="result__card"><span class="muted">Pontos (Desafio)</span><strong id="endScore">—</strong></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row row--gap row--wrap">
+          <button id="btnPlayAgain" class="btn btn--primary" type="button">Jogar de novo</button>
+          <button id="btnCloseEnd" class="btn btn--ghost" value="cancel" type="submit">Fechar</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <footer class="footer">
+    <span class="muted">Digita+ • feito para prática diária • Publicável no GitHub Pages</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
