@@ -1,1 +1,0 @@
-document.getElementById("btnLogin").onclick=()=>{auth.hidden=true;app.hidden=false;}
