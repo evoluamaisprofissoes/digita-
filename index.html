@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digita+ • Evolua+ Profissões</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="./assets/logo-evolua.png" alt="Evolua+ Profissões" class="brand__logoimg">
+    <div class="brand__text">
+      <div class="brand__name">Digita<span class="plus">+</span></div>
+      <div class="brand__tag">by Evolua+ Profissões</div>
+    </div>
+  </div>
+  <div class="topbar__actions">
+    <button id="btnProfile">Perfil</button>
+    <button id="btnTheme">Tema</button>
+    <button id="btnSound">Som</button>
+  </div>
+</header>
+
+<main class="container">
+  <section id="auth">
+    <h1>Entrar</h1>
+    <label>Usuário</label>
+    <input id="loginUsername" placeholder="Ex: aluno">
+    <label>Senha</label>
+    <input id="loginPassword" type="password" value="aluno123" readonly>
+    <button id="btnLogin">Entrar</button>
+  </section>
+
+  <section id="app" hidden></section>
+</main>
+
+<footer>
+  <small>© Evolua+ Profissões • Digita+</small>
+</footer>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>
